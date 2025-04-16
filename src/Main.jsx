@@ -1,5 +1,6 @@
 import { useState } from "react"
 import IngredientsList from "../components.jsx/IngredientsList"
+import ClaudeRecipe from "../components.jsx/ClaudeRecipe"
 
 export default function Main() {
     const [ingredients, setIngredients] = useState(
@@ -38,6 +39,8 @@ export default function Main() {
                     toggleRecipeShown={toggleRecipeShown}
                 />
             }
+            
+            {recipeShown && <ClaudeRecipe />}
         </main>
         </>
     )
