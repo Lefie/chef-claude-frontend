@@ -4,9 +4,7 @@ import ClaudeRecipe from "../components.jsx/ClaudeRecipe"
 import GetRecipe from "../utils.js"
 
 export default function Main() {
-    const [ingredients, setIngredients] = useState(
-        ["all the main spices", "pasta", "ground beef", "tomato paste"]
-    )
+    const [ingredients, setIngredients] = useState([] )
 
     const [recipe, setRecipe] = useState('')
 
@@ -36,14 +34,14 @@ export default function Main() {
                 <button>Add ingredient</button>            
             </form>
 
-            {ingredients.length > 0 &&
+            {ingredients.length >= 0 &&
                 <IngredientsList
                     ingredients={ingredients}
                     generateRecipe={generateRecipe}
                 />
             }
             
-            {recipe && <ClaudeRecipe />}
+            {recipe && <ClaudeRecipe recipe={recipe}/>}
         </main>
         </>
     )
