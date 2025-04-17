@@ -1,24 +1,27 @@
 import { useState } from "react"
 import IngredientsList from "../components.jsx/IngredientsList"
 import ClaudeRecipe from "../components.jsx/ClaudeRecipe"
+import GetRecipe from "../utils.js"
 
 export default function Main() {
     const [ingredients, setIngredients] = useState(
         ["all the main spices", "pasta", "ground beef", "tomato paste"]
     )
 
-    const [recipeShown, setRecipeShown] = useState(false)
+    const [recipe, setRecipe] = useState('')
+
 
     function addIngredient(formData) {
         const newIngredient = formData.get("ingredient")
         setIngredients(prevIngredients => [...prevIngredients, newIngredient])
     }
 
-    function toggleRecipeShown() {
-        setRecipeShown(prev => !prev)
+    function generateRecipe() {
+        console.log(ingredients)
+        GetRecipe(ingredients).then(data => {
+            setRecipe(data)
+        })
     }
-
-
 
     return (
         <>
@@ -36,11 +39,11 @@ export default function Main() {
             {ingredients.length > 0 &&
                 <IngredientsList
                     ingredients={ingredients}
-                    toggleRecipeShown={toggleRecipeShown}
+                    generateRecipe={generateRecipe}
                 />
             }
             
-            {recipeShown && <ClaudeRecipe />}
+            {recipe && <ClaudeRecipe />}
         </main>
         </>
     )
